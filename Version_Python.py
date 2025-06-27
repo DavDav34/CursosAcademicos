@@ -1,3 +1,37 @@
+# Clase Estudiante
+class Estudiante(Persona, Calificable):
+    def _init_(self, nombre: str, id: str):
+        super()._init_(nombre, id)
+        self.calificaciones: List[float] = []
+    
+    def agregar_calificacion(self, calificacion: float):
+        self.calificaciones.append(calificacion)
+    
+    def calcular_promedio(self) -> float:
+        if not self.calificaciones:
+            raise PromedioInvalidoException("El estudiante no tiene calificaciones registradas")
+        return sum(self.calificaciones) / len(self.calificaciones)
+    
+    def mostrar_informacion(self):
+        print(f"Estudiante: {self.nombre}, ID: {self.id}, Calificaciones: {' '.join(map(str, self.calificaciones))}")
+
+# Clase Curso
+class Curso:
+    def _init_(self, nombre_curso: str, profesor: Persona):
+        self.nombre_curso = nombre_curso
+        self.profesor = profesor
+        self.estudiantes: List[Estudiante] = []
+    
+    def agregar_estudiante(self, estudiante: Estudiante):
+        self.estudiantes.append(estudiante)
+    
+    def mostrar_informacion(self):
+        print(f"Curso: {self.nombre_curso}")
+        print("Profesor asignado:")
+        self.profesor.mostrar_informacion()
+        print("Estudiantes inscritos:")
+        for estudiante in self.estudiantes:
+            estudiante.mostrar_informacion()
 # Clase principal con menú
 class SistemaGestionCursos:
     def __init__(self):
