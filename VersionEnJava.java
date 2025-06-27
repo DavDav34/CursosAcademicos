@@ -1,4 +1,4 @@
-// Clase principal con menú
+// modifi
 public class SistemaGestionCursos {
     private static List<Persona> personas = new ArrayList<>();
     private static List<Curso> cursos = new ArrayList<>();
